@@ -1,0 +1,84 @@
+<div class="container vh-100 d-flex justify-content-center align-items-center">
+    <!-- Main Content Wrapper -->
+    <div class="w-100">
+      <!-- Dashboard Header -->
+      <div class="text-center mb-4">
+        <h2>User Dashboard</h2>
+      </div>
+  
+      <!-- User Form (Add/Edit) -->
+      <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+          <h4 class="mb-0">{{ isEditMode ? 'Edit User' : 'Add New User' }}</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="isEditMode ? updateUser() : createUser()">
+            <div class="form-group mb-3">
+              <label for="name" class="form-label">Name</label>
+              <input
+                type="text"
+                class="form-control"
+                id="name"
+                [(ngModel)]="newUser.name"
+                name="name"
+                required
+                placeholder="Enter user name"
+              />
+            </div>
+  
+            <div class="form-group mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                [(ngModel)]="newUser.email"
+                name="email"
+                required
+                placeholder="Enter user email"
+              />
+            </div>
+  
+            <div class="d-grid">
+              <button type="submit" class="btn btn-success">
+                {{ isEditMode ? 'Update User' : 'Add User' }}
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+  
+      <!-- User List Table -->
+      <div class="text-center">
+        <h3 class="mb-3">User List</h3>
+        <div class="table-responsive">
+          <table class="table table-bordered table-hover">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <td>{{ user.id }}</td>
+                <td>{{ user.name }}</td>
+                <td>{{ user.email }}</td>
+                <td>
+                  <button class="btn btn-warning btn-sm" (click)="editUser(user)">
+                    Edit
+                  </button>
+                  <button class="btn btn-danger btn-sm" (click)="deleteUser(user.id)">
+                    Delete
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  
